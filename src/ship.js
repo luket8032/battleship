@@ -1,15 +1,23 @@
-const Ship = (shipLength, numHit = 0, sunk = false) => {
-
-    const hit = () => {
-        numHit += 1;
-        return numHit;
+class Ship {
+    constructor(shipLength, numHit = 0, sunk = false) {
+        this.shipLength = shipLength;
+        this.numHit = numHit;
+        this.sunk = sunk
     }
 
-    const isSunk = () => {
-        return (shipLength === numHit)
+
+    hit() {
+        if(!this.sunk) {
+            this.numHit++;
+            this.sunk = this.isSunk();
+        }
     }
 
-    return { shipLength, numHit, sunk, hit, isSunk }
+    isSunk() {
+        return (this.shipLength === this.numHit)
+    }
 }
+
+const test = new Ship(2)
 
 module.exports = Ship;
