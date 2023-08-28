@@ -1,0 +1,24 @@
+{
+    "ships": [
+        {
+            "shipName": "Destroyer",
+            "shipLength": 2
+        },
+        {
+            "shipName": "Submarine",
+            "shipLength": 3
+        },
+        {
+            "shipName": "Cruiser",
+            "shipLength": 3
+        },
+        {
+            "shipName": "Battleship",
+            "shipLength": 4
+        },
+        {
+            "shipName": "Carrier",
+            "shipLength": 5
+        }
+    ]
+}

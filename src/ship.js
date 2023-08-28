@@ -1,6 +1,6 @@
 class Ship {
-    constructor(shipId ,shipLength, numHit = 0, sunk = false, direction = 'x') {
-        this.shipId = shipId;
+    constructor(shipName ,shipLength, numHit = 0, sunk = false, direction = 'x') {
+        this.shipName = shipName;
         this.shipLength = shipLength;
         this.numHit = numHit;
         this.sunk = sunk;
@@ -18,7 +18,5 @@ class Ship {
         return (this.shipLength === this.numHit)
     }
 }
-
-const test = new Ship(2)
 
 module.exports = Ship;

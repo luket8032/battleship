@@ -1,5 +1,5 @@
 const Ship = require('./ship');
-const shipData = require('./shipData');
+const shipData = require('./shipData.json');
 
 class Gameboard {
     constructor() {
@@ -16,6 +16,12 @@ class Gameboard {
                 shipId: null
             });
         }
+    }
+
+    shipInit() {
+        shipData.ships.forEach(ship => {
+            this.ships.push(ship)
+        })
     }
 
     placeShip(ship, location) {
@@ -41,9 +47,7 @@ class Gameboard {
 const test = new Gameboard;
 const testship = new Ship(1, 3, 0, false, 'x');
 test.locationInit();
+test.shipInit();
 test.placeShip(testship, 3);
-
-console.log(test)
-
 
 module.exports = Gameboard;
