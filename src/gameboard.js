@@ -48,6 +48,17 @@ class Gameboard {
             this.missedShots.push(this.locations[location].id)
         }
     }
+
+    checkAllSunk() {
+        let allSunk = true;
+        this.ships.every(ship => {
+            if(ship.sunk === false) {
+                allSunk = false;
+                return false;
+            }
+        })
+        return allSunk;
+    }
 }
 
 module.exports = Gameboard;
