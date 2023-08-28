@@ -10,3 +10,19 @@ h1 {
     font-size: 3.5em;
     text-align: center;
 }
+
+.board-container {
+    display: grid;
+    grid-template-columns: repeat(10, 50px);
+    grid-template-rows: repeat(10, 50px);
+}
+
+.boards-wrapper {
+    display: flex;
+    justify-content: space-around;
+}
+
+.cell {
+    background-color: lightblue;
+    border: 1px solid blue;
+}
