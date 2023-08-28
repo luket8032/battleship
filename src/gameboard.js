@@ -8,7 +8,7 @@ class Gameboard {
         this.ships = [];
     }
 
-    locationInit() {
+    init() {
         for(let i = 0; i < 100; i++) {
             this.locations.push({
                 id: i,
@@ -16,9 +16,7 @@ class Gameboard {
                 shipName: null
             });
         }
-    }
-
-    shipInit() {
+        
         shipData.ships.forEach(ship => {
             const newShip = new Ship(ship.shipName, ship.shipLength);
             this.ships.push(newShip);

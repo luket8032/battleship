@@ -1,8 +1,7 @@
 const Gameboard = require('../gameboard');
 
 const testBoard = new Gameboard();
-testBoard.locationInit();
-testBoard.shipInit();
+testBoard.init();
 
 test('placeShip places ship at given location', () => {
     testBoard.placeShip(testBoard.ships[0], 3);
