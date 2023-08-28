@@ -11,7 +11,7 @@ class Gameboard {
     locationInit() {
         for(let i = 0; i < 100; i++) {
             this.locations.push({
-                id: i, // temp property to make sure placeShip is placing ships in the right location
+                id: i,
                 isHit: false,
                 shipName: null
             });
@@ -38,7 +38,6 @@ class Gameboard {
     recieveAttack(location) {
         this.locations[location].isHit = true;
         if(this.locations[location].shipName) {
-            // somehow call hit() on ship thats in location
             this.ships.forEach(ship => {
                 if(ship.shipName === this.locations[location].shipName) {
                     ship.hit();
