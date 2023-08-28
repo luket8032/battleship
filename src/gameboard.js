@@ -2,12 +2,12 @@ const Ship = require('./ship');
 
 class Gameboard {
     constructor() {
-        this.locations = []
+        this.locations = [];
     }
 
     locationInit() {
         for(let i = 1; i <= 100; i++) {
-            this.locations.push({id: i, isShip: false, isHit: false})
+            this.locations.push({id: i, isShip: false, isHit: false});
         }
     }
 
@@ -20,12 +20,16 @@ class Gameboard {
             }
         }
     }
+
+    recieveAttack(location) {
+        
+    }
 }
 
 const test = new Gameboard;
 const testship = new Ship(3, 0, false, 'y');
-test.locationInit()
-test.placeShip(testship, 3)
+test.locationInit();
+test.placeShip(testship, 3);
 
 console.log(test)
 
