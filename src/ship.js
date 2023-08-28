@@ -1,5 +1,6 @@
 class Ship {
-    constructor(shipLength, numHit = 0, sunk = false, direction = 'x') {
+    constructor(shipId ,shipLength, numHit = 0, sunk = false, direction = 'x') {
+        this.shipId = shipId;
         this.shipLength = shipLength;
         this.numHit = numHit;
         this.sunk = sunk;

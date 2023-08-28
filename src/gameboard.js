@@ -7,7 +7,11 @@ class Gameboard {
 
     locationInit() {
         for(let i = 1; i <= 100; i++) {
-            this.locations.push({id: i, isShip: false, isHit: false});
+            this.locations.push({
+                id: i, // temp property to make sure placeShip is placing ships in the right location
+                isShip: false,
+                isHit: false
+            });
         }
     }
 
