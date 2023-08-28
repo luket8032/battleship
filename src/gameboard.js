@@ -1,8 +1,11 @@
 const Ship = require('./ship');
+const shipData = require('./shipData');
 
 class Gameboard {
     constructor() {
         this.locations = [];
+        this.missedShots = [];
+        this.ships = [];
     }
 
     locationInit() {
@@ -25,9 +28,14 @@ class Gameboard {
         }
     }
 
-    // recieveAttack(location) {
-        
-    // }
+    recieveAttack(location) {
+        this.locations[location].isHit = true;
+        if(this.locations[location].shipId) {
+            // somehow call hit() on ship thats in location
+        } else {
+            this.missedShots.push(this.locations[location].id)
+        }
+    }
 }
 
 const test = new Gameboard;
