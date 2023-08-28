@@ -20,8 +20,11 @@ class Gameboard {
 
     shipInit() {
         shipData.ships.forEach(ship => {
-            this.ships.push(ship)
+            const newShip = new Ship(ship.shipName, ship.shipLength);
+            this.ships.push(newShip);
         })
+
+        console.log(this.ships)
     }
 
     placeShip(ship, location) {
