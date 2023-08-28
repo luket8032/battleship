@@ -9,11 +9,11 @@ class Gameboard {
     }
 
     locationInit() {
-        for(let i = 1; i <= 100; i++) {
+        for(let i = 0; i < 100; i++) {
             this.locations.push({
                 id: i, // temp property to make sure placeShip is placing ships in the right location
                 isHit: false,
-                shipId: null
+                shipName: null
             });
         }
     }
@@ -22,35 +22,32 @@ class Gameboard {
         shipData.ships.forEach(ship => {
             const newShip = new Ship(ship.shipName, ship.shipLength);
             this.ships.push(newShip);
-        })
-
-        console.log(this.ships)
+        });
     }
 
     placeShip(ship, location) {
         for(let i = 0; i < ship.shipLength; i++) {
             if(ship.direction === 'x') {
-                this.locations[location + i - 1].shipId = ship.shipId;
+                this.locations[location + i].shipName = ship.shipName;
             } else {
-                this.locations[location + i * 10 - 1].shipId = ship.shipId;
+                this.locations[location + i * 10].shipName = ship.shipName;
             }
         }
     }
 
     recieveAttack(location) {
         this.locations[location].isHit = true;
-        if(this.locations[location].shipId) {
+        if(this.locations[location].shipName) {
             // somehow call hit() on ship thats in location
+            this.ships.forEach(ship => {
+                if(ship.shipName === this.locations[location].shipName) {
+                    ship.hit();
+                }
+            });
         } else {
             this.missedShots.push(this.locations[location].id)
         }
     }
 }
-
-const test = new Gameboard;
-const testship = new Ship(1, 3, 0, false, 'x');
-test.locationInit();
-test.shipInit();
-test.placeShip(testship, 3);
 
 module.exports = Gameboard;
