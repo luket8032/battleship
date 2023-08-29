@@ -129,6 +129,16 @@ eval("const domStuff = () => {\n    const boardsWrapper = document.getElementByI
 
 /***/ }),
 
+/***/ "./src/game.js":
+/*!*********************!*\
+  !*** ./src/game.js ***!
+  \*********************/
+/***/ ((module) => {
+
+eval("const game = () => {\n    function gameInit(playerBoard, computerBoard) {\n        // code to make both playerboards and place ships\n        playerBoard.init();\n        computerBoard.init();\n        // temp manual ship placement\n        playerBoard.placeShip(playerBoard.ships[0], 3);\n        playerBoard.placeShip(playerBoard.ships[1], 23);\n        playerBoard.placeShip(playerBoard.ships[2], 53);\n        playerBoard.placeShip(playerBoard.ships[3], 73);\n        playerBoard.placeShip(playerBoard.ships[4], 93);\n\n        // temp manual ship placement\n        computerBoard.placeShip(computerBoard.ships[0], 3);\n        computerBoard.placeShip(computerBoard.ships[1], 23);\n        computerBoard.placeShip(computerBoard.ships[2], 53);\n        computerBoard.placeShip(computerBoard.ships[3], 73);\n        computerBoard.placeShip(computerBoard.ships[4], 93);\n    }\n\n    function playerTurn() {\n        // code for player to attack computer\n    }\n\n    function computerTurn() {\n        // code for computer to attack player\n    }\n\n    function endGame(board1, board2) {\n        if(board1.checkAllSunk) return 'You won! So epic mode...';\n        if(board2.checkAllSunk) return 'You lost. You stink...'\n    }\n\n    return { gameInit, playerTurn, computerTurn, endGame, }\n}\n\nmodule.exports = game;\n\n//# sourceURL=webpack://battleship/./src/game.js?");
+
+/***/ }),
+
 /***/ "./src/gameboard.js":
 /*!**************************!*\
   !*** ./src/gameboard.js ***!
@@ -146,7 +156,7 @@ eval("const Ship = __webpack_require__(/*! ./ship */ \"./src/ship.js\");\nconst 
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n\n\nconst domStuff = __webpack_require__(/*! ./domStuff */ \"./src/domStuff.js\");\nconst Gameboard = __webpack_require__(/*! ./gameboard */ \"./src/gameboard.js\");\n\nconst dom = domStuff();\n\nconst playerBoard = new Gameboard(true);\nconst computerBoard = new Gameboard();\nplayerBoard.init();\ncomputerBoard.init();\n// temp manual ship placement\nplayerBoard.placeShip(playerBoard.ships[0], 3);\nplayerBoard.placeShip(playerBoard.ships[1], 23);\nplayerBoard.placeShip(playerBoard.ships[2], 53);\nplayerBoard.placeShip(playerBoard.ships[3], 73);\nplayerBoard.placeShip(playerBoard.ships[4], 93);\n\n// temp manual ship placement\ncomputerBoard.placeShip(computerBoard.ships[0], 3);\ncomputerBoard.placeShip(computerBoard.ships[1], 23);\ncomputerBoard.placeShip(computerBoard.ships[2], 53);\ncomputerBoard.placeShip(computerBoard.ships[3], 73);\ncomputerBoard.placeShip(computerBoard.ships[4], 93);\n\ndom.renderBoard(playerBoard);\ndom.renderBoard(computerBoard);\n\n\n\n\n\n//# sourceURL=webpack://battleship/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n\n\nconst domStuff = __webpack_require__(/*! ./domStuff */ \"./src/domStuff.js\");\nconst Gameboard = __webpack_require__(/*! ./gameboard */ \"./src/gameboard.js\");\nconst gameFns = __webpack_require__(/*! ./game */ \"./src/game.js\");\n\nconst game = gameFns();\nconst dom = domStuff();\n\nconst playerBoard = new Gameboard(true);\nconst computerBoard = new Gameboard();\n\ngame.gameInit(playerBoard, computerBoard)\n\n\ndom.renderBoard(playerBoard);\ndom.renderBoard(computerBoard);\n\n\n\n\n\n//# sourceURL=webpack://battleship/./src/index.js?");
 
 /***/ }),
 
