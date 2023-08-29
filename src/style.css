@@ -23,8 +23,11 @@ h1 {
 }
 
 .cell {
+    align-items: center;
     background-color: lightblue;
     border: 1px solid blue;
+    display: flex;
+    justify-content: center;
 }
 
 .cell.has-ship {

@@ -4,6 +4,11 @@ const domStuff = () => {
     const renderBoard = (board) => {
         const boardContainer = document.createElement('div');
         boardContainer.className = 'board-container';
+        if(board.isPlayer) {
+            boardContainer.setAttribute('data-owner', 'player')
+        } else {
+            boardContainer.setAttribute('data-owner', 'computer');
+        }
         board.locations.forEach(cell => {
             const newCell = document.createElement('div');
             newCell.classList.add('cell');
