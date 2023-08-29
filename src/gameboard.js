@@ -2,10 +2,11 @@ const Ship = require('./ship');
 const shipData = require('./shipData.json');
 
 class Gameboard {
-    constructor() {
+    constructor(isPlayer = false) {
         this.locations = [];
         this.missedShots = [];
         this.ships = [];
+        this.isPlayer = isPlayer;
     }
 
     init() {
@@ -31,6 +32,10 @@ class Gameboard {
                 this.locations[location + i * 10].shipName = ship.shipName;
             }
         }
+    }
+
+    placeRandom() {
+        
     }
 
     recieveAttack(location) {

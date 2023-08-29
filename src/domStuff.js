@@ -1,5 +1,4 @@
 const domStuff = () => {
-    const main = document.getElementById('main');
     const boardsWrapper = document.getElementById('boardsWrapper')
 
     const renderBoard = (board) => {
@@ -7,8 +6,12 @@ const domStuff = () => {
         boardContainer.className = 'board-container';
         board.locations.forEach(cell => {
             const newCell = document.createElement('div');
-            newCell.className = 'cell';
+            newCell.classList.add('cell');
             newCell.setAttribute('data-location', cell.id);
+            if(cell.shipName) {
+                if(board.isPlayer) newCell.classList.add('has-ship');
+                newCell.setAttribute('data-ship', cell.shipName);
+            }
             boardContainer.append(newCell);
         });
         boardsWrapper.append(boardContainer);
