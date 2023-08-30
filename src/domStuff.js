@@ -3,11 +3,15 @@ const domStuff = () => {
 
     const renderBoard = (board) => {
         const boardContainer = document.createElement('div');
-        boardContainer.className = 'board-container';
+        const boardGrid = document.createElement('div');
+        const boardTitle = document.createElement('h1');
+        boardGrid.className = 'board-container';
         if(board.isPlayer) {
-            boardContainer.setAttribute('data-owner', 'player')
+            boardGrid.setAttribute('data-owner', 'player')
+            boardTitle.textContent = 'Your Board'
         } else {
-            boardContainer.setAttribute('data-owner', 'computer');
+            boardGrid.setAttribute('data-owner', 'computer');
+            boardTitle.textContent = 'Enemy Board';
         }
         board.locations.forEach(cell => {
             const newCell = document.createElement('div');
@@ -21,8 +25,9 @@ const domStuff = () => {
             if(cell.isHit) {
                 newCell.className = 'hit';
             }
-            boardContainer.append(newCell);
+            boardGrid.append(newCell);
         });
+        boardContainer.append(boardTitle, boardGrid);
         boardsWrapper.append(boardContainer);
     }
 

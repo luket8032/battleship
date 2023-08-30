@@ -48,8 +48,7 @@ const game = () => {
     }
 
     function addBoardListener() {
-        const boardWrapper = document.getElementById('boardsWrapper');
-        const board = boardWrapper.querySelector(`.board-container[data-owner="computer"]`);
+        const board = document.querySelector(`.board-container[data-owner="computer"]`);
         board.addEventListener('click', doTurn);
     }
 
