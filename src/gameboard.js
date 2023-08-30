@@ -53,10 +53,9 @@ class Gameboard {
 
     checkAllSunk() {
         let allSunk = true;
-        this.ships.every(ship => {
+        this.ships.forEach(ship => {
             if(ship.sunk === false) {
-                allSunk = false;
-                return false;
+                allSunk = false
             }
         })
         return allSunk;

@@ -40,6 +40,13 @@ const game = () => {
             player.autoAttack(playerBoard)
             dom.updateBoard(playerBoard, computerBoard)
         }
+
+        if(playerBoard.checkAllSunk() || computerBoard.checkAllSunk()) {
+            console.log('game over')
+        } else {
+            addBoardListener();
+            console.log(computerBoard.checkAllSunk());
+        }
     }
 
     function addBoardListener() {
