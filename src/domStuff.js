@@ -17,12 +17,22 @@ const domStuff = () => {
                 if(board.isPlayer) newCell.classList.add('has-ship');
                 newCell.setAttribute('data-ship', cell.shipName);
             }
+
+            if(cell.isHit) {
+                newCell.className = 'hit';
+            }
             boardContainer.append(newCell);
         });
         boardsWrapper.append(boardContainer);
     }
 
-    return { renderBoard }
+    const updateBoard = (playerBoard, computerBoard) => {
+        boardsWrapper.innerHTML = '';
+        renderBoard(playerBoard);
+        renderBoard(computerBoard);
+    }
+
+    return { renderBoard, updateBoard }
 }
 
 module.exports = domStuff;

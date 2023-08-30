@@ -5,10 +5,11 @@ const gameFns = require('./game');
 
 const game = gameFns();
 
-const playerBoard = new Gameboard(true);
-const computerBoard = new Gameboard();
+game.startGame();
 
-game.gameInit(playerBoard, computerBoard)
+
+
+
 
 
 

@@ -31,5 +31,13 @@ h1 {
 }
 
 .cell.has-ship {
+    background-color: lightgreen;
+}
+
+.hit {
+    align-items: center;
     background-color: lightcoral;
+    border: 1px solid blue;
+    display: flex;
+    justify-content: center;
 }

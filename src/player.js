@@ -3,8 +3,17 @@ class Player {
         this.playerName = playerName
     }
 
-    shoot(board, location) {
-        board.recieveAttack(location);
+    attack(targetBoard, location) {
+        targetBoard.recieveAttack(location);
+    }
+
+    autoAttack(targetBoard) {
+        const randomLocation = Math.floor(Math.random() * 99)
+        if(targetBoard.locations[randomLocation].isHit) {
+            this.autoAttack(targetBoard)
+        } else {
+            targetBoard.recieveAttack(randomLocation);
+        }
     }
 }
 
