@@ -26,6 +26,10 @@ againBtn.addEventListener('click', () => {
 
 menuBtn.addEventListener('click', () => {
     // reset and go to menu
+    game.resetGame();
+    startScreen.style.display = 'flex';
+    boardsWrapper.style.display = 'none';
+    endWrapper.style.display = 'none';
 });
 
 
