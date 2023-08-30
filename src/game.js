@@ -24,8 +24,6 @@ const game = () => {
     computerBoard.placeShip(computerBoard.ships[3], 73);
     computerBoard.placeShip(computerBoard.ships[4], 93);
 
-    const whoTurn = 0;
-
     function doTurn(e) { 
         const target = e.target;
         let targetLocation;
@@ -45,7 +43,7 @@ const game = () => {
             console.log('game over')
         } else {
             addBoardListener();
-            console.log(computerBoard.checkAllSunk());
+            console.log(computerBoard.checkAllSunk());  
         }
     }
 
