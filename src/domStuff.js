@@ -37,7 +37,12 @@ const domStuff = () => {
         renderBoard(computerBoard);
     }
 
-    return { renderBoard, updateBoard }
+    const renderEnd = () => {
+        const end = document.getElementById('endWrapper');
+        end.style.display = 'block';
+    }
+
+    return { renderBoard, updateBoard, renderEnd }
 }
 
 module.exports = domStuff;

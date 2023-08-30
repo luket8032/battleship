@@ -40,10 +40,9 @@ const game = () => {
         }
 
         if(playerBoard.checkAllSunk() || computerBoard.checkAllSunk()) {
-            console.log('game over')
+            dom.renderEnd();
         } else {
             addBoardListener();
-            console.log(computerBoard.checkAllSunk());  
         }
     }
 
@@ -67,7 +66,31 @@ const game = () => {
         if(board2.checkAllSunk) return 'You lost. You stink...'
     }
 
-    return { startGame, doTurn, endGame, }
+    function resetGame() {
+        const boardsWrapper = document.getElementById('boardsWrapper');
+        playerBoard.ships = [];
+        computerBoard.ships = []
+        playerBoard.locations = [];
+        computerBoard.locations = [];
+        playerBoard.init();
+        computerBoard.init();
+
+        playerBoard.placeShip(playerBoard.ships[0], 3);
+        playerBoard.placeShip(playerBoard.ships[1], 23);
+        playerBoard.placeShip(playerBoard.ships[2], 53);
+        playerBoard.placeShip(playerBoard.ships[3], 73);
+        playerBoard.placeShip(playerBoard.ships[4], 93);
+        computerBoard.placeShip(computerBoard.ships[0], 3);
+        computerBoard.placeShip(computerBoard.ships[1], 23);
+        computerBoard.placeShip(computerBoard.ships[2], 53);
+        computerBoard.placeShip(computerBoard.ships[3], 73);
+        computerBoard.placeShip(computerBoard.ships[4], 93);
+
+        boardsWrapper.innerHTML = '';
+        startGame();
+    }
+
+    return { startGame, endGame, resetGame }
 }
 
 module.exports = game;

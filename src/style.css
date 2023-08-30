@@ -119,6 +119,10 @@ h1 {
     padding: 15px 25px;
 }
 
+.end-buttons button:hover {
+    scale: 1.05;
+}
+
 .end-wrapper {
     display: none;
     height: 100vh;
