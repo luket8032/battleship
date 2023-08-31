@@ -58,18 +58,32 @@ const game = () => {
     function showPreview(e) {
         const remaining = playerBoard.ships[currentShip].shipLength;
         const target = e.target;
+        playerBoard.ships[currentShip].direction = 'y'; //temp for test
+        const shipDirection = playerBoard.ships[currentShip].direction;
         const currentLocation = parseInt(target.dataset.location);
-        if(currentLocation % 10 === 9) {
-            target.className = 'preview';
+        if (shipDirection === 'x') {
+            if(currentLocation % 10 === 9) {
+                target.className = 'preview';
+            } else {
+                target.className = 'preview';
+                for(let i = 0; i < remaining; i++) {
+                    const nextLocation = currentLocation + i;
+                    const nextCell = document.querySelector(`[data-location="${nextLocation}"]`)
+                    nextCell.className = 'preview';
+    
+                    if (nextLocation % 10 === 9) {
+                        break; // Stop preview if it would overflow to the next row
+                    }
+                }
+            }
         } else {
-            target.className = 'preview';
             for(let i = 0; i < remaining; i++) {
-                const nextLocation = currentLocation + i;
+                const nextLocation = currentLocation + i * 10;
                 const nextCell = document.querySelector(`[data-location="${nextLocation}"]`)
-                nextCell.className = 'preview';
-
-                if (nextLocation % 10 === 9) {
+                if (nextLocation >= 100) {
                     break; // Stop preview if it would overflow to the next row
+                } else {
+                    nextCell.className = 'preview';
                 }
             }
         }

@@ -18,6 +18,7 @@ startBtn.addEventListener('click', () => {
     startScreen.style.display = 'none';
     boardsWrapper.style.display = 'flex';
     instructions.style.display = 'block';
+    instructions.textContent = 'Click a spot on your board to place your ships.'
 });
 
 againBtn.addEventListener('click', () => {
