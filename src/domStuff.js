@@ -6,9 +6,10 @@ const domStuff = () => {
         const boardGrid = document.createElement('div');
         const boardTitle = document.createElement('h1');
         boardGrid.className = 'board-container';
+        boardTitle.className = 'board-title';
         if(board.isPlayer) {
-            boardGrid.setAttribute('data-owner', 'player')
-            boardTitle.textContent = 'Your Board'
+            boardGrid.setAttribute('data-owner', 'player');
+            boardTitle.textContent = 'Your Board';
         } else {
             boardGrid.setAttribute('data-owner', 'computer');
             boardTitle.textContent = 'Enemy Board';

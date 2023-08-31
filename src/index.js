@@ -9,13 +9,15 @@ const againBtn = document.getElementById('playAgain');
 const menuBtn = document.getElementById('mainMenu');
 const startScreen = document.getElementById('startScreen');
 const boardsWrapper = document.getElementById('boardsWrapper');
-const endWrapper = document.getElementById('endWrapper')
+const endWrapper = document.getElementById('endWrapper');
+const instructions = document.getElementById('instructions');
 
 game.startGame();
 
 startBtn.addEventListener('click', () => {
     startScreen.style.display = 'none';
     boardsWrapper.style.display = 'flex';
+    instructions.style.display = 'block';
 });
 
 againBtn.addEventListener('click', () => {
