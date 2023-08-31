@@ -6,6 +6,7 @@ class Gameboard {
         this.locations = [];
         this.missedShots = [];
         this.ships = [];
+        this.cantPlace = [];
         this.isPlayer = isPlayer;
         this.numShips = 0;
     }
@@ -60,6 +61,19 @@ class Gameboard {
             }
         })
         return allSunk;
+    }
+
+    getCantPlace() {
+        this.locations.forEach(location => {
+            if(location.shipName) {
+                if(!this.cantPlace.includes(location.id)) this.cantPlace.push(location.id);
+                if(!this.cantPlace.includes(location.id + 1)) this.cantPlace.push(location.id + 1);
+                if(!this.cantPlace.includes(location.id - 1)) this.cantPlace.push(location.id - 1);
+                if(!this.cantPlace.includes(location.id + 10)) this.cantPlace.push(location.id + 10);
+                if(!this.cantPlace.includes(location.id - 10)) this.cantPlace.push(location.id - 10);
+            }
+        })
+        console.log(this.cantPlace)
     }
 }
 

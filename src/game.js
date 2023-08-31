@@ -14,6 +14,9 @@ const game = () => {
     playerBoard.init();
     computerBoard.init();
 
+    playerBoard.placeShip(computerBoard.ships[2], 53);
+    playerBoard.getCantPlace();
+
     computerBoard.placeShip(computerBoard.ships[0], 3);
     computerBoard.placeShip(computerBoard.ships[1], 23);
     computerBoard.placeShip(computerBoard.ships[2], 53);
@@ -49,18 +52,31 @@ const game = () => {
             cell.addEventListener('mouseover', showPreview);
             cell.addEventListener('mouseleave', () => {
                 cells.forEach(cell => {
-                    cell.className = 'cell';
+                    if(cell.className !== "cell has-ship") {
+                        cell.className = 'cell';
+                    }
                 });
             });
         })
+        board.addEventListener('click', doPlace)
+    }
+
+    function doPlace(e) {
+        const target = e.target;
+        // check if placement is valid, if so place ship, else do nothing
+
     }
 
     function showPreview(e) {
         const remaining = playerBoard.ships[currentShip].shipLength;
         const target = e.target;
-        playerBoard.ships[currentShip].direction = 'y'; //temp for test
         const shipDirection = playerBoard.ships[currentShip].direction;
         const currentLocation = parseInt(target.dataset.location);
+
+        if (target.classList.contains('has-ship')) {
+            return;
+        }
+
         if (shipDirection === 'x') {
             if(currentLocation % 10 === 9) {
                 target.className = 'preview';
@@ -69,20 +85,22 @@ const game = () => {
                 for(let i = 0; i < remaining; i++) {
                     const nextLocation = currentLocation + i;
                     const nextCell = document.querySelector(`[data-location="${nextLocation}"]`)
-                    nextCell.className = 'preview';
-    
-                    if (nextLocation % 10 === 9) {
-                        break; // Stop preview if it would overflow to the next row
+                    if (!nextCell.classList.contains('has-ship')) {
+                        nextCell.className = 'preview';
+                    }
+                    if (nextLocation % 10 === 9 ) {
+                        break;
                     }
                 }
             }
         } else {
             for(let i = 0; i < remaining; i++) {
                 const nextLocation = currentLocation + i * 10;
-                const nextCell = document.querySelector(`[data-location="${nextLocation}"]`)
                 if (nextLocation >= 100) {
-                    break; // Stop preview if it would overflow to the next row
-                } else {
+                    break;
+                }
+                const nextCell = document.querySelector(`[data-location="${nextLocation}"]`);
+                if (!nextCell.classList.contains('has-ship')) {
                     nextCell.className = 'preview';
                 }
             }
