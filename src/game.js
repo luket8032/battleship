@@ -9,7 +9,7 @@ const game = () => {
     const playerBoard = new Gameboard(true);
     const computerBoard = new Gameboard();
     
-    const currentShip = 0;
+    const currentShip = 4;
 
     playerBoard.init();
     computerBoard.init();
@@ -50,19 +50,28 @@ const game = () => {
             cell.addEventListener('mouseleave', () => {
                 cells.forEach(cell => {
                     cell.className = 'cell';
-                })
+                });
             });
         })
     }
 
     function showPreview(e) {
-        const remaining = playerBoard.ships[currentShip].shipLength - 1;
+        const remaining = playerBoard.ships[currentShip].shipLength;
         const target = e.target;
-        target.className = 'miss';
-        for(let i = 0; i < remaining; i++) {
-            const currentLocation = target.dataset.location;
-            const nextCell = document.querySelector(`[data-location="${Number(currentLocation) + 1}"]`)
-            nextCell.className = 'miss';
+        const currentLocation = parseInt(target.dataset.location);
+        if(currentLocation % 10 === 9) {
+            target.className = 'preview';
+        } else {
+            target.className = 'preview';
+            for(let i = 0; i < remaining; i++) {
+                const nextLocation = currentLocation + i;
+                const nextCell = document.querySelector(`[data-location="${nextLocation}"]`)
+                nextCell.className = 'preview';
+
+                if (nextLocation % 10 === 9) {
+                    break; // Stop preview if it would overflow to the next row
+                }
+            }
         }
     }
 

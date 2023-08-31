@@ -82,6 +82,14 @@ h1 {
     justify-content: center;
 }
 
+.preview {
+    align-items: center;
+    background-color: lightgreen;
+    border: 1px solid blue;
+    display: flex;
+    justify-content: center;
+}
+
 /* Start Page */
 .start-button {
     border-radius: 20px;
