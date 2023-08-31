@@ -32,6 +32,7 @@ menuBtn.addEventListener('click', () => {
     startScreen.style.display = 'flex';
     boardsWrapper.style.display = 'none';
     endWrapper.style.display = 'none';
+    instructions.style.display = 'none';
 });
 
 

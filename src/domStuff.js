@@ -26,6 +26,10 @@ const domStuff = () => {
             if(cell.isHit) {
                 newCell.className = 'hit';
             }
+
+            if(cell.isHit && !cell.shipName) {
+                newCell.className = 'miss';
+            }
             boardGrid.append(newCell);
         });
         boardContainer.append(boardTitle, boardGrid);
