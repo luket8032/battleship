@@ -14,10 +14,11 @@ const domStuff = () => {
             boardGrid.setAttribute('data-owner', 'computer');
             boardTitle.textContent = 'Enemy Board';
         }
-        board.locations.forEach(cell => {
+        board.locations.forEach((cell, index) => {
             const newCell = document.createElement('div');
             newCell.classList.add('cell');
             newCell.setAttribute('data-location', cell.id);
+            newCell.textContent = index;
             if(cell.shipName) {
                 if(board.isPlayer) newCell.classList.add('has-ship');
                 newCell.setAttribute('data-ship', cell.shipName);
@@ -35,7 +36,7 @@ const domStuff = () => {
         boardContainer.append(boardTitle, boardGrid);
         boardsWrapper.append(boardContainer);
     }
-
+    
     const updateBoard = (playerBoard, computerBoard) => {
         boardsWrapper.innerHTML = '';
         renderBoard(playerBoard);

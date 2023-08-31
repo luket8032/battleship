@@ -8,15 +8,11 @@ const game = () => {
 
     const playerBoard = new Gameboard(true);
     const computerBoard = new Gameboard();
+    
+    const currentShip = 0;
 
     playerBoard.init();
     computerBoard.init();
-
-    playerBoard.placeShip(playerBoard.ships[0], 3);
-    playerBoard.placeShip(playerBoard.ships[1], 23);
-    playerBoard.placeShip(playerBoard.ships[2], 53);
-    playerBoard.placeShip(playerBoard.ships[3], 73);
-    playerBoard.placeShip(playerBoard.ships[4], 93);
 
     computerBoard.placeShip(computerBoard.ships[0], 3);
     computerBoard.placeShip(computerBoard.ships[1], 23);
@@ -46,6 +42,31 @@ const game = () => {
         }
     }
 
+    function startPlacement() {
+        const board = document.querySelector(`.board-container[data-owner="player"]`);
+        const cells = board.querySelectorAll('.cell');
+        cells.forEach(cell => {
+            cell.addEventListener('mouseover', showPreview);
+            cell.addEventListener('mouseleave', () => {
+                cells.forEach(cell => {
+                    cell.className = 'cell';
+                })
+            });
+        })
+    }
+
+    function showPreview(e) {
+        const remaining = playerBoard.ships[currentShip].shipLength - 1;
+        const target = e.target;
+        target.className = 'miss';
+        for(let i = 0; i < remaining; i++) {
+            const currentLocation = target.dataset.location;
+            const nextCell = document.querySelector(`[data-location="${Number(currentLocation) + 1}"]`)
+            nextCell.className = 'miss';
+        }
+    }
+
+
     function addBoardListener() {
         const board = document.querySelector(`.board-container[data-owner="computer"]`);
         board.addEventListener('click', doTurn);
@@ -53,6 +74,7 @@ const game = () => {
 
     function startGame() {
         renderBoards();
+        startPlacement();
         addBoardListener();
     }
 
@@ -75,11 +97,6 @@ const game = () => {
         playerBoard.init();
         computerBoard.init();
 
-        playerBoard.placeShip(playerBoard.ships[0], 3);
-        playerBoard.placeShip(playerBoard.ships[1], 23);
-        playerBoard.placeShip(playerBoard.ships[2], 53);
-        playerBoard.placeShip(playerBoard.ships[3], 73);
-        playerBoard.placeShip(playerBoard.ships[4], 93);
         computerBoard.placeShip(computerBoard.ships[0], 3);
         computerBoard.placeShip(computerBoard.ships[1], 23);
         computerBoard.placeShip(computerBoard.ships[2], 53);
@@ -90,7 +107,7 @@ const game = () => {
         startGame();
     }
 
-    return { startGame, endGame, resetGame }
+    return { startGame, endGame, resetGame, startPlacement }
 }
 
 module.exports = game;

@@ -7,6 +7,7 @@ class Gameboard {
         this.missedShots = [];
         this.ships = [];
         this.isPlayer = isPlayer;
+        this.numShips = 0;
     }
 
     init() {
