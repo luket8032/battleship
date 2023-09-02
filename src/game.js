@@ -14,7 +14,6 @@ const game = () => {
     playerBoard.init();
     computerBoard.init();
 
-    playerBoard.getCantPlace();
     computerBoard.placeShip(computerBoard.ships[0], 3);
     computerBoard.placeShip(computerBoard.ships[1], 23);
     computerBoard.placeShip(computerBoard.ships[2], 53);
@@ -97,13 +96,15 @@ const game = () => {
 
         // check if placement is valid, if so place ship, else do nothing
         if(canPlace) {
+            console.log(currentShip)
             playerBoard.placeShip(playerBoard.ships[currentShip], currentLocation);
             console.log('ship placed!')
             currentShip++;
             dom.updateBoard(playerBoard, computerBoard);
-            console.log(currentShip)
-            if(currentShip < 5) {
+            if(currentShip !== 5) {
                 startPlacement();
+            } else {
+                addBoardListener();
             }
         }
 
@@ -157,7 +158,6 @@ const game = () => {
     function startGame() {
         renderBoards();
         startPlacement();
-        addBoardListener();
     }
 
     function renderBoards() {
@@ -176,6 +176,7 @@ const game = () => {
         computerBoard.ships = []
         playerBoard.locations = [];
         computerBoard.locations = [];
+        currentShip = 0;
         playerBoard.init();
         computerBoard.init();
 
