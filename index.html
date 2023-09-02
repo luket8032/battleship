@@ -13,13 +13,17 @@
             <button class="start-button" id="startButton">Start Game</button>
         </div>
         <p class="instructions" id="instructions"></p>
-        <button class="rotate-button" id="rotateBtn">Rotate ship</button>
+        <div class="place-buttons-container">
+            <button class="rotate-button" id="rotateBtn">Rotate ship</button>
+            <button class="rotate-button" id="randomBtn">Place Random</button>
+        </div>
         <div class="boards-wrapper" id="boardsWrapper"></div>
     </div>
 
     <div class="end-wrapper" id="endWrapper">
         <div class="end-screen">
             <h1>Game Over</h1>
+            <p class="end-message" id="endMessage"></p>
             <div class="end-buttons">
                 <button id="playAgain">Play again</button>
                 <button id="mainMenu">Main menu</button>
