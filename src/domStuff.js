@@ -1,13 +1,11 @@
 const domStuff = () => {
-    const boardsWrapper = document.getElementById('boardsWrapper')
-    const startBtn = document.getElementById('startButton');
-    const againBtn = document.getElementById('playAgain');
-    const menuBtn = document.getElementById('mainMenu');
+    const boardsWrapper = document.getElementById('boardsWrapper');
     const startScreen = document.getElementById('startScreen');
     const endWrapper = document.getElementById('endWrapper');
     const instructions = document.getElementById('instructions');
     const title = document.getElementById('title');
     const rotateBtn = document.getElementById('rotateBtn');
+    const randomBtn = document.getElementById('randomBtn');
 
     const renderBoard = (board) => {
         const boardContainer = document.createElement('div');
@@ -65,6 +63,7 @@ const domStuff = () => {
         instructions.style.display = 'block';
         instructions.textContent = 'Click a spot on your board to place your ships.';
         rotateBtn.style.display = 'block';
+        randomBtn.style.display = 'block';
     }
 
     const hideEnd = () => {
@@ -84,6 +83,7 @@ const domStuff = () => {
         boardsWrapper.style.display = 'none';
         instructions.style.display = 'none';
         rotateBtn.style.display = 'none';
+        randomBtn.style.display = 'none';
     }
 
     const changeInstructions = (newInstructions) => {
@@ -92,6 +92,7 @@ const domStuff = () => {
 
     const hideRotate = () => {
         rotateBtn.style.display = 'none';
+        randomBtn.style.display = 'none';
     }
 
     return { 

@@ -6,15 +6,19 @@ const dom = domStuff();
 const game = () => {
     const player = new Player('human');
 
-    const playerBoard = new Gameboard(true);
-    const computerBoard = new Gameboard();
+    let playerBoard = new Gameboard(true);
+    let computerBoard = new Gameboard();
     
     let currentShip = 0;
 
     playerBoard.init();
     computerBoard.init();
-
-    computerBoard.placeRandom();
+    // temp
+    computerBoard.placeShip(computerBoard.ships[0], 3);
+    computerBoard.placeShip(computerBoard.ships[1], 23);
+    computerBoard.placeShip(computerBoard.ships[2], 53);
+    computerBoard.placeShip(computerBoard.ships[3], 73);
+    computerBoard.placeShip(computerBoard.ships[4], 93);
 
     function doTurn(e) { 
         const target = e.target;
@@ -31,6 +35,9 @@ const game = () => {
         }
 
         if(playerBoard.checkAllSunk() || computerBoard.checkAllSunk()) {
+            const endMessage = document.getElementById('endMessage');
+            if(playerBoard.checkAllSunk()) endMessage.textContent = 'You lost...';
+            if(computerBoard.checkAllSunk()) endMessage.textContent = 'Victory is yours!'
             dom.renderEnd();
         } else {
             addBoardListener();
@@ -41,6 +48,7 @@ const game = () => {
         const board = document.querySelector(`.board-container[data-owner="player"]`);
         const cells = board.querySelectorAll('.cell');
         const rotateBtn = document.getElementById('rotateBtn');
+        const randomBtn = document.getElementById('randomBtn');
         const shipDirection = playerBoard.ships[currentShip].direction;
 
         rotateBtn.addEventListener('click', () => {
@@ -50,7 +58,15 @@ const game = () => {
                 playerBoard.ships[currentShip].direction = 'x'
             }
             startPlacement();
-        })
+        });
+
+        randomBtn.addEventListener('click', () => {
+            playerBoard.placeRandom();
+            dom.updateBoard(playerBoard, computerBoard);
+            addBoardListener();
+            dom.changeInstructions('Click a spot on the board to take a shot at the enemy.');
+            dom.hideRotate();
+        });
 
         cells.forEach(cell => {
             cell.addEventListener('mouseover', showPreview);
@@ -61,7 +77,7 @@ const game = () => {
                     }
                 });
             });
-        })
+        });
         board.addEventListener('click', doPlace)
     }
 
@@ -103,9 +119,7 @@ const game = () => {
 
         // check if placement is valid, if so place ship, else do nothing
         if(canPlace) {
-            console.log(currentShip)
             playerBoard.placeShip(playerBoard.ships[currentShip], currentLocation);
-            console.log('ship placed!')
             currentShip++;
             dom.updateBoard(playerBoard, computerBoard);
             if(currentShip !== 5) {
@@ -174,21 +188,13 @@ const game = () => {
         dom.renderBoard(computerBoard);
     }
 
-    function endGame(board1, board2) {
-        if(board1.checkAllSunk) return 'You won! So epic mode...';
-        if(board2.checkAllSunk) return 'You lost. You stink...'
-    }
-
     function resetGame() {
         const boardsWrapper = document.getElementById('boardsWrapper');
-        playerBoard.ships = [];
-        computerBoard.ships = []
-        playerBoard.locations = [];
-        computerBoard.locations = [];
+        playerBoard = new Gameboard(true);
+        computerBoard = new Gameboard();
         currentShip = 0;
         playerBoard.init();
         computerBoard.init();
-
         computerBoard.placeShip(computerBoard.ships[0], 3);
         computerBoard.placeShip(computerBoard.ships[1], 23);
         computerBoard.placeShip(computerBoard.ships[2], 53);
@@ -199,7 +205,7 @@ const game = () => {
         startGame();
     }
 
-    return { startGame, endGame, resetGame, startPlacement }
+    return { startGame, resetGame, startPlacement }
 }
 
 module.exports = game;
