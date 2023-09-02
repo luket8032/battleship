@@ -45,6 +45,18 @@ const game = () => {
     function startPlacement() {
         const board = document.querySelector(`.board-container[data-owner="player"]`);
         const cells = board.querySelectorAll('.cell');
+        const rotateBtn = document.getElementById('rotateBtn');
+        const shipDirection = playerBoard.ships[currentShip].direction;
+
+        rotateBtn.addEventListener('click', () => {
+            if(shipDirection === 'x') {
+                playerBoard.ships[currentShip].direction = 'y'
+            } else {
+                playerBoard.ships[currentShip].direction = 'x'
+            }
+            startPlacement();
+        })
+
         cells.forEach(cell => {
             cell.addEventListener('mouseover', showPreview);
             cell.addEventListener('mouseleave', () => {
