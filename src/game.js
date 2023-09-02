@@ -9,14 +9,12 @@ const game = () => {
     const playerBoard = new Gameboard(true);
     const computerBoard = new Gameboard();
     
-    const currentShip = 4;
+    let currentShip = 0;
 
     playerBoard.init();
     computerBoard.init();
 
-    playerBoard.placeShip(computerBoard.ships[2], 53);
     playerBoard.getCantPlace();
-
     computerBoard.placeShip(computerBoard.ships[0], 3);
     computerBoard.placeShip(computerBoard.ships[1], 23);
     computerBoard.placeShip(computerBoard.ships[2], 53);
@@ -63,7 +61,51 @@ const game = () => {
 
     function doPlace(e) {
         const target = e.target;
+        const remaining = playerBoard.ships[currentShip].shipLength;
+        const shipDirection = playerBoard.ships[currentShip].direction;
+        const currentLocation = parseInt(target.dataset.location);
+        let canPlace = true;
+        // check if overlap with already placed ship
+        for(let i = 0; i < remaining; i++) {
+            if(shipDirection === 'x') {
+                const lastLocation = currentLocation + playerBoard.ships[currentShip].shipLength;
+                const nextLocation = currentLocation + i + 1;
+                if(nextLocation % 10 === 0 && nextLocation !== lastLocation) {
+                    canPlace = false;
+                    break;
+                }
+
+                if(playerBoard.locations[currentLocation + i].shipName) {
+                    canPlace = false;
+                    break;
+                }
+            } else {
+                // check for direction 'y'
+                const lastLocation = currentLocation + (playerBoard.ships[currentShip].shipLength * 10);
+                const nextLocation = currentLocation + ((i + 1) * 10);
+                if(nextLocation >= 100 && nextLocation !== lastLocation) {
+                    canPlace = false;
+                    break;
+                }
+
+                if(playerBoard.locations[currentLocation + (i * 10)].shipName) {
+                    canPlace = false;
+                    break;
+                }    
+            }
+        }
+
         // check if placement is valid, if so place ship, else do nothing
+        if(canPlace) {
+            playerBoard.placeShip(playerBoard.ships[currentShip], currentLocation);
+            console.log('ship placed!')
+            currentShip++;
+            dom.updateBoard(playerBoard, computerBoard);
+            console.log(currentShip)
+            if(currentShip < 5) {
+                startPlacement();
+            }
+        }
 
     }
 
@@ -106,7 +148,6 @@ const game = () => {
             }
         }
     }
-
 
     function addBoardListener() {
         const board = document.querySelector(`.board-container[data-owner="computer"]`);

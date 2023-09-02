@@ -73,7 +73,10 @@ class Gameboard {
                 if(!this.cantPlace.includes(location.id - 10)) this.cantPlace.push(location.id - 10);
             }
         })
-        console.log(this.cantPlace)
+    }
+
+    checkValidPlacement(location) {
+       console.log(this.cantPlace.includes(Number(location))) 
     }
 }
 
