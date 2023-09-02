@@ -25,6 +25,7 @@ h1 {
     display: none;
     font-size: 1.5em;
     text-align: center;
+    margin-top: 5%;
 }
 
 .main {
@@ -35,6 +36,19 @@ h1 {
 
 .main h1 {
     margin-top: 50px;
+}
+
+.rotate-button {
+    border-radius: 20px;
+    font-size: 1em;
+    margin: 15px auto;
+    padding: 15px 30px;
+    transition: .2s;
+    width: fit-content;
+}
+
+.rotate-button:hover {
+    scale: 1.02;
 }
 
 /* Board Styles */

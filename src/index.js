@@ -11,11 +11,13 @@ const startScreen = document.getElementById('startScreen');
 const boardsWrapper = document.getElementById('boardsWrapper');
 const endWrapper = document.getElementById('endWrapper');
 const instructions = document.getElementById('instructions');
+const title = document.getElementById('title');
 
 game.startGame();
 
 startBtn.addEventListener('click', () => {
     startScreen.style.display = 'none';
+    title.style.display = 'none';
     boardsWrapper.style.display = 'flex';
     instructions.style.display = 'block';
     instructions.textContent = 'Click a spot on your board to place your ships.'
@@ -31,6 +33,7 @@ menuBtn.addEventListener('click', () => {
     // reset and go to menu
     game.resetGame();
     startScreen.style.display = 'flex';
+    title.style.display = 'block';
     boardsWrapper.style.display = 'none';
     endWrapper.style.display = 'none';
     instructions.style.display = 'none';
