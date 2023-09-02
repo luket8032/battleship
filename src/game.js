@@ -14,6 +14,8 @@ const game = () => {
     playerBoard.init();
     computerBoard.init();
 
+    playerBoard.placeRandom();
+
     computerBoard.placeShip(computerBoard.ships[0], 3);
     computerBoard.placeShip(computerBoard.ships[1], 23);
     computerBoard.placeShip(computerBoard.ships[2], 53);
@@ -171,7 +173,7 @@ const game = () => {
 
     function startGame() {
         renderBoards();
-        startPlacement();
+        addBoardListener(); // temp
     }
 
     function renderBoards() {

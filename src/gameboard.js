@@ -37,7 +37,56 @@ class Gameboard {
     }
 
     placeRandom() {
-        
+        let currentShip = 0;
+
+        while(currentShip !== 5) {
+            const randomLocation = Math.floor(Math.random() * 99);
+            if(Math.random() * 2 >= 1) {
+                this.ships[currentShip].direction = 'y';
+            }
+            
+            if(this.checkValidPlacement(this.ships[currentShip], randomLocation)) {
+                this.placeShip(this.ships[currentShip], randomLocation)
+                currentShip++;
+            }
+        }
+    }
+
+    checkValidPlacement(ship, location) {
+        const remaining = ship.shipLength;
+        const shipDirection = ship.direction;
+        const currentLocation = parseInt(location);
+        let canPlace = true;
+        // check if overlap with already placed ship
+        for(let i = 0; i < remaining; i++) {
+            if(shipDirection === 'x') {
+                const lastLocation = currentLocation + ship.shipLength;
+                const nextLocation = currentLocation + i + 1;
+                if(nextLocation % 10 === 0 && nextLocation !== lastLocation) {
+                    canPlace = false;
+                    break;
+                }
+
+                if(this.locations[currentLocation + i].shipName) {
+                    canPlace = false;
+                    break;
+                }
+            } else {
+                // check for direction 'y'
+                const lastLocation = currentLocation + (ship.shipLength * 10);
+                const nextLocation = currentLocation + ((i + 1) * 10);
+                if(nextLocation >= 100 && nextLocation !== lastLocation) {
+                    canPlace = false;
+                    break;
+                }
+
+                if(this.locations[currentLocation + (i * 10)].shipName) {
+                    canPlace = false;
+                    break;
+                }    
+            }
+        }
+        return canPlace;
     }
 
     recieveAttack(location) {
@@ -75,9 +124,6 @@ class Gameboard {
         })
     }
 
-    checkValidPlacement(location) {
-       console.log(this.cantPlace.includes(Number(location))) 
-    }
 }
 
 module.exports = Gameboard;

@@ -20,6 +20,7 @@ startBtn.addEventListener('click', () => {
 againBtn.addEventListener('click', () => {
     // reset and play again
     game.resetGame();
+    dom.showGame();
     dom.hideEnd();
 });
 
