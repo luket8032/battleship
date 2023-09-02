@@ -1,5 +1,13 @@
 const domStuff = () => {
     const boardsWrapper = document.getElementById('boardsWrapper')
+    const startBtn = document.getElementById('startButton');
+    const againBtn = document.getElementById('playAgain');
+    const menuBtn = document.getElementById('mainMenu');
+    const startScreen = document.getElementById('startScreen');
+    const endWrapper = document.getElementById('endWrapper');
+    const instructions = document.getElementById('instructions');
+    const title = document.getElementById('title');
+    const rotateBtn = document.getElementById('rotateBtn');
 
     const renderBoard = (board) => {
         const boardContainer = document.createElement('div');
@@ -47,12 +55,58 @@ const domStuff = () => {
         end.style.display = 'block';
     }
 
-    const addRotate = () => {
-        const rotateBtn = document.getElementById('rotateBtn')
+    const hideStart = () => {
+        startScreen.style.display = 'none';
+        title.style.display = 'none';
+    }
+
+    const showGame = () => {
+        boardsWrapper.style.display = 'flex';
+        instructions.style.display = 'block';
+        instructions.textContent = 'Click a spot on your board to place your ships.';
         rotateBtn.style.display = 'block';
     }
 
-    return { renderBoard, updateBoard, renderEnd, addRotate }
+    const hideEnd = () => {
+        endWrapper.style.display = 'none';
+    }
+
+    const showEnd = () => {
+        endWrapper.style.display = 'block';
+    }
+
+    const showStart = () => {
+        startScreen.style.display = 'flex';
+        title.style.display = 'block';
+    }
+
+    const hideGame = () => {
+        boardsWrapper.style.display = 'none';
+        instructions.style.display = 'none';
+        rotateBtn.style.display = 'none';
+    }
+
+    const changeInstructions = (newInstructions) => {
+        instructions.textContent = newInstructions;
+    }
+
+    const hideRotate = () => {
+        rotateBtn.style.display = 'none';
+    }
+
+    return { 
+        renderBoard, 
+        updateBoard, 
+        renderEnd, 
+        hideStart, 
+        showGame, 
+        hideEnd, 
+        showStart, 
+        hideGame, 
+        showEnd,
+        changeInstructions,
+        hideRotate
+    }
 }
 
 module.exports = domStuff;

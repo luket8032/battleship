@@ -2,41 +2,33 @@ import './style.css';
 
 const Gameboard = require('./gameboard');
 const gameFns = require('./game');
+const domStuff = require('./domStuff');
 
 const game = gameFns();
+const dom = domStuff();
 const startBtn = document.getElementById('startButton');
 const againBtn = document.getElementById('playAgain');
 const menuBtn = document.getElementById('mainMenu');
-const startScreen = document.getElementById('startScreen');
-const boardsWrapper = document.getElementById('boardsWrapper');
-const endWrapper = document.getElementById('endWrapper');
-const instructions = document.getElementById('instructions');
-const title = document.getElementById('title');
 
 game.startGame();
 
 startBtn.addEventListener('click', () => {
-    startScreen.style.display = 'none';
-    title.style.display = 'none';
-    boardsWrapper.style.display = 'flex';
-    instructions.style.display = 'block';
-    instructions.textContent = 'Click a spot on your board to place your ships.'
+    dom.hideStart();
+    dom.showGame();
 });
 
 againBtn.addEventListener('click', () => {
     // reset and play again
     game.resetGame();
-    endWrapper.style.display = 'none';
+    dom.hideEnd();
 });
 
 menuBtn.addEventListener('click', () => {
     // reset and go to menu
     game.resetGame();
-    startScreen.style.display = 'flex';
-    title.style.display = 'block';
-    boardsWrapper.style.display = 'none';
-    endWrapper.style.display = 'none';
-    instructions.style.display = 'none';
+    dom.showStart();
+    dom.hideGame();
+    dom.hideEnd();
 });
 
 

@@ -117,6 +117,8 @@ const game = () => {
                 startPlacement();
             } else {
                 addBoardListener();
+                dom.changeInstructions('Click a spot on the board to take a shot at the enemy.');
+                dom.hideRotate();
             }
         }
 
