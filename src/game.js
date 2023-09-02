@@ -14,24 +14,17 @@ const game = () => {
     playerBoard.init();
     computerBoard.init();
 
-    playerBoard.placeRandom();
-
-    computerBoard.placeShip(computerBoard.ships[0], 3);
-    computerBoard.placeShip(computerBoard.ships[1], 23);
-    computerBoard.placeShip(computerBoard.ships[2], 53);
-    computerBoard.placeShip(computerBoard.ships[3], 73);
-    computerBoard.placeShip(computerBoard.ships[4], 93);
+    computerBoard.placeRandom();
 
     function doTurn(e) { 
         const target = e.target;
         let targetLocation;
         
-        if(target.classList.contains('cell')) {
+        if(target.classList.contains('cell') || target.classList.contains('miss')) {
             targetLocation = target.dataset.location
         }
 
         if(!computerBoard.locations[targetLocation].isHit) {
-            // do something
             player.attack(computerBoard, targetLocation);
             player.autoAttack(playerBoard)
             dom.updateBoard(playerBoard, computerBoard)
@@ -173,7 +166,7 @@ const game = () => {
 
     function startGame() {
         renderBoards();
-        addBoardListener(); // temp
+        startPlacement();
     }
 
     function renderBoards() {
