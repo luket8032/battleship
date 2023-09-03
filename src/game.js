@@ -13,12 +13,8 @@ const game = () => {
 
     playerBoard.init();
     computerBoard.init();
-    // temp
-    computerBoard.placeShip(computerBoard.ships[0], 3);
-    computerBoard.placeShip(computerBoard.ships[1], 23);
-    computerBoard.placeShip(computerBoard.ships[2], 53);
-    computerBoard.placeShip(computerBoard.ships[3], 73);
-    computerBoard.placeShip(computerBoard.ships[4], 93);
+
+    computerBoard.placeRandom();
 
     function doTurn(e) { 
         const target = e.target;
@@ -44,6 +40,14 @@ const game = () => {
         }
     }
 
+    function handleRandom() {
+        playerBoard.placeRandom();
+        dom.updateBoard(playerBoard, computerBoard);
+        addBoardListener();
+        dom.changeInstructions('Click a spot on the board to take a shot at the enemy.');
+        dom.hideRotate();
+    }
+
     function startPlacement() {
         const board = document.querySelector(`.board-container[data-owner="player"]`);
         const cells = board.querySelectorAll('.cell');
@@ -60,13 +64,7 @@ const game = () => {
             startPlacement();
         });
 
-        randomBtn.addEventListener('click', () => {
-            playerBoard.placeRandom();
-            dom.updateBoard(playerBoard, computerBoard);
-            addBoardListener();
-            dom.changeInstructions('Click a spot on the board to take a shot at the enemy.');
-            dom.hideRotate();
-        });
+        randomBtn.addEventListener('click', handleRandom);
 
         cells.forEach(cell => {
             cell.addEventListener('mouseover', showPreview);
@@ -174,8 +172,10 @@ const game = () => {
     }
 
     function addBoardListener() {
+        const randomBtn = document.getElementById('randomBtn')
         const board = document.querySelector(`.board-container[data-owner="computer"]`);
         board.addEventListener('click', doTurn);
+        randomBtn.removeEventListener('click', handleRandom);
     }
 
     function startGame() {
@@ -195,11 +195,8 @@ const game = () => {
         currentShip = 0;
         playerBoard.init();
         computerBoard.init();
-        computerBoard.placeShip(computerBoard.ships[0], 3);
-        computerBoard.placeShip(computerBoard.ships[1], 23);
-        computerBoard.placeShip(computerBoard.ships[2], 53);
-        computerBoard.placeShip(computerBoard.ships[3], 73);
-        computerBoard.placeShip(computerBoard.ships[4], 93);
+
+        computerBoard.placeRandom();
 
         boardsWrapper.innerHTML = '';
         startGame();
