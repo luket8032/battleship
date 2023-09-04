@@ -32,8 +32,14 @@ const game = () => {
 
         if(playerBoard.checkAllSunk() || computerBoard.checkAllSunk()) {
             const endMessage = document.getElementById('endMessage');
-            if(playerBoard.checkAllSunk()) endMessage.textContent = 'You lost...';
-            if(computerBoard.checkAllSunk()) endMessage.textContent = 'Victory is yours!'
+            if(playerBoard.checkAllSunk()) {
+                endMessage.textContent = 'You lost...';
+                endMessage.style.color = 'red';
+            }
+            if(computerBoard.checkAllSunk()) {
+                endMessage.textContent = 'Victory is yours!';
+                endMessage.style.color = 'green';
+            }
             dom.renderEnd();
         } else {
             addBoardListener();
